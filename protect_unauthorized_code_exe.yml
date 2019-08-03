@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+    - name: protect its memory from unauthorized code execution
+      sysctl:
+        name: kernel.randomize_va_space
+        value: 2
+        state: present
+        reload: yes
+        ignoreerrors: yes
+
+...

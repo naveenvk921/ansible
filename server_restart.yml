@@ -1,0 +1,19 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+     - name: Rebooting 
+       command: shutdown -r now
+       async: 0
+       poll: 0
+       sudo: true
+       ignore_errors: true
+       when: reboot_hint.stdout.find("reboot") != -1
+       register: rebooting
+
+     - name: Wait for Server to get restarted
+       pause: seconds=45
+       when: rebooting|changed
+
+
+...

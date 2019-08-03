@@ -1,0 +1,18 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+     - name: update the conf file in host
+       lineinfile: path=/etc/apache2/ports.conf regexp="^Listen=" line="Listen 8080"
+     - name: restart apache2 Service
+       service: 
+        name: apache2
+        state: restarted
+     - name: verify service status
+       command: systemctl status apache2
+       ignore_errors: yes
+       changed_when: false
+     - name: checking port 8082 is listening
+       wait_for: port=8082 timeout=5 
+       register: result 
+...

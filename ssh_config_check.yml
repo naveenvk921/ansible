@@ -1,0 +1,10 @@
+---
+- name: SSH File check
+  lineinfile: 
+    state: present
+    dest: /etc/ssh/sshd_config/
+    regexp: ^#?PermitEmptyPasswords
+    line: PermitEmptyPasswords no
+    validate: sshd -tf %s
+    notify: restart sshd
+...

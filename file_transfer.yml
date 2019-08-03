@@ -1,0 +1,7 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+     - name: copy to remote server
+       copy: src=files/index.html dest=/var/www/html/ owner=root group=root
+...

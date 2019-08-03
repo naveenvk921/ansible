@@ -1,0 +1,5 @@
+---
+- name: Webserver Reboot
+  become_user: root 
+  reboot: shutdown -r now
+  ##test_command: uptime 

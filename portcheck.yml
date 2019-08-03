@@ -1,0 +1,8 @@
+---
+- hosts: webservers
+  become: yes
+  
+  tasks:
+      - wait_for: host=remote.host port=8080 state=started timeout=2
+      - debug: msg=ok
+

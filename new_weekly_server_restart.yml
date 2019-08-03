@@ -1,0 +1,13 @@
+---
+- hosts: webservers
+  become: yes
+  tasks:
+     - cron:
+       become: yes
+       become_user: root
+       minute: 45
+       hour: 4
+       weekday: 3 
+       shell: "sleep 5 && reboot"
+
+...
